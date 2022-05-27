@@ -39,4 +39,9 @@ public class Category extends AbstractEntity {
             && Objects.equals(description, category.description);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description);
+    }
+
 }
