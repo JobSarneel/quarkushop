@@ -29,14 +29,14 @@ public class CartService {
         return this.cartRepository.findAll()
                 .stream()
                 .map(CartService::mapToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<CartDto> findAllActiveCarts() {
         return this.cartRepository.findByStatus(CartStatus.NEW)
                 .stream()
                 .map(CartService::mapToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Cart create(Long customerId) {

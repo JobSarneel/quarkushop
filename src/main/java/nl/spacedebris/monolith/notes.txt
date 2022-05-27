@@ -1,1 +1,13 @@
 docker run -d --name demo-postgres -e POSTGRES_USER=test -e POSTGRES_PASSWORD=test -e POSTGRES_DB=demo -p 5432:5432 postgres:13
+
+[io.quarkus.deployment.pkg.steps.JarResultBuildStep] Dependencies with duplicate files detected.
+The dependencies
+[io.quarkus:quarkus-spring-data-commons-api::jar:2.1.SP2[paths:
+C:\Users\jsarn\.m2\repository\io\quarkus\quarkus-spring-data-commons-api\2.1.SP2\quarkus-spring-data-commons-api-2.1.SP2.jar;],
+io.quarkus:quarkus-spring-data-jpa-api::jar:2.1.SP2[paths:
+C:\Users\jsarn\.m2\repository\io\quarkus\quarkus-spring-data-jpa-api\2.1.SP2\quarkus-spring-data-jpa-api-2.1.SP2.jar;],
+io.quarkus:quarkus-spring-boot-orm-api::jar:2.1.SP1[paths: C:\Users\jsarn\.m2\repository\io\quarkus\quarkus-spring-boot-orm-api\2.1.SP1\quarkus-spring-boot-orm-api-2.1.SP1.jar;], io.quarkus:quarkus-spring-core-api::jar:5.2.SP6[paths: C:\Users\jsarn\.m2\repository\io\quarkus\quarkus-spring-core-api\5.2.SP6\quarkus-spring-core-api-5.2.SP6.jar;], io.quarkus:quarkus-spring-context-api::jar:5.2.SP6[paths: C:\Users\jsarn\.m2\repository\io\quarkus\quarkus-spring-context-api\5.2.SP6\quarkus-spring-context-api-5.2.SP6.jar;], io.quarkus:quarkus-spring-beans-api::jar:5.2.SP6[paths: C:\Users\jsarn\.m2\repository\io\quarkus\quarkus-spring-beans-api\5.2.SP6\quarkus-spring-beans-api-5.2.SP6.jar;]] contain duplicate files, e.g. Dummy.class
+
+'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\vsdevcmd\ext\vcvars'
+
+Start-Process -FilePath vcvars.bat
