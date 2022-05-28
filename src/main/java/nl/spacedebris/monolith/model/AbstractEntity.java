@@ -9,7 +9,7 @@ import java.time.Instant;
 @Getter
 @Setter
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
+//@EntityListeners(AuditingEntityListener.class)
 public class AbstractEntity {
 
     @Id
@@ -17,7 +17,7 @@ public class AbstractEntity {
     private long id;
 
     @Column(name = "created_date", nullable = false)
-    private Instant createdDate;
+    private Instant createdDate = Instant.now();
 
     @Column(name = "last_modified_date")
     private Instant lastModifiedDate;
