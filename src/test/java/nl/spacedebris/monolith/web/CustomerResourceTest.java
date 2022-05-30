@@ -10,7 +10,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
 
-import static io.restassured.RestAssured.get;
+import static io.restassured.RestAssured.*;
 import static io.restassured.RestAssured.given;
 import static javax.ws.rs.core.Response.Status.NO_CONTENT;
 import static javax.ws.rs.core.Response.Status.OK;
@@ -95,104 +95,83 @@ class CustomerResourceTest {
                 .body(containsString("Homer"));
     }
 
-//    @Test
-//    void testAllInactiveUsersWithAdminRole() {
-//        given().when()
-//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + ADMIN_BEARER_TOKEN)
-//                .get("/customers/inactive")
-//                .then()
-//                .statusCode(OK.getStatusCode())
-//                .body(containsString("peter.quinn@mail.hello"));
-//    }
-//
-//    @Test
-//    void testFindByIdWithAdminRole() {
-//        given().when()
-//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + ADMIN_BEARER_TOKEN)
-//                .get("/customers/1")
-//                .then()
-//                .statusCode(OK.getStatusCode())
-//                .body(containsString("Jason"))
-//                .body(containsString("Bourne"));
-//    }
-//
-//    @Test
-//    void testCreateWithAdminRole() {
-//        var requestParams = new HashMap<>();
-//        requestParams.put("firstName", "Saul");
-//        requestParams.put("lastName", "Berenson");
-//        requestParams.put("email", "call.saul@mail.com");
-//
-//        var newCustomerId = given()
-//                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
-//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + ADMIN_BEARER_TOKEN)
-//                .body(requestParams)
-//                .post("/customers")
-//                .then()
-//                .statusCode(OK.getStatusCode())
-//                .extract()
-//                .jsonPath()
-//                .getInt("id");
-//
-//        assertThat(newCustomerId).isNotZero();
-//
-//        given().when()
-//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + ADMIN_BEARER_TOKEN)
-//                .get("/customers/" + newCustomerId)
-//                .then()
-//                .statusCode(OK.getStatusCode())
-//                .body(containsString("Saul"))
-//                .body(containsString("Berenson"))
-//                .body(containsString("call.saul@mail.com"));
-//
-//        given().when()
-//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + ADMIN_BEARER_TOKEN)
-//                .delete("/customers/" + newCustomerId)
-//                .then()
-//                .statusCode(NO_CONTENT.getStatusCode());
-//    }
-//
-//    @Test
-//    void testDeleteThenCustomerIsDisabledWithAdminRole() {
-//        var initialActiveCount = given().when()
-//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + ADMIN_BEARER_TOKEN)
-//                .get("/customers/active")
-//                .then()
-//                .statusCode(OK.getStatusCode())
-//                .extract()
-//                .jsonPath()
-//                .getInt("size()");
-//
-//        var initialInactiveCount = given().when()
-//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + ADMIN_BEARER_TOKEN)
-//                .get("/customers/inactive")
-//                .then()
-//                .statusCode(OK.getStatusCode())
-//                .extract().jsonPath()
-//                .getInt("size()");
-//
-//        given().when()
-//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + ADMIN_BEARER_TOKEN)
-//                .delete("/customers/2")
-//                .then()
-//                .statusCode(NO_CONTENT.getStatusCode());
-//
-//        given().when()
-//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + ADMIN_BEARER_TOKEN)
-//                .get("/customers/active")
-//                .then()
-//                .statusCode(OK.getStatusCode())
-//                .body("size()", is(initialActiveCount - 1));
-//
-//        given().when()
-//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + ADMIN_BEARER_TOKEN)
-//                .get("/customers/inactive")
-//                .then()
-//                .statusCode(OK.getStatusCode())
-//                .body("size()", is(initialInactiveCount + 1))
-//                .body(containsString("Jason"))
-//                .body(containsString("Bourne"));
-//    }
+    @Test
+    void testFindAllInactiveCustomers() {
+        get("/customers/inactive")
+                .then()
+                .statusCode(OK.getStatusCode())
+                .body(containsString("peter.quinn@mail.hello"));
+    }
+
+    @Test
+    void testFindCustomerById() {
+        get("/customers/1")
+                .then()
+                .statusCode(OK.getStatusCode())
+                .body(containsString("Jason"))
+                .body(containsString("Bourne"));
+    }
+
+    @Test
+    void testCreate() {
+        var requestParams = new HashMap<>();
+        requestParams.put("firstName", "Saul");
+        requestParams.put("lastName", "Berenson");
+        requestParams.put("email", "call.saul@mail.com");
+
+        var newCustomerId = given()
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
+                .body(requestParams).post("/customers").then()
+                .statusCode(OK.getStatusCode())
+                .extract()
+                .jsonPath()
+                .getInt("id");
+
+        assertThat(newCustomerId).isNotZero();
+
+        get("/customers/" + newCustomerId)
+                .then()
+                .statusCode(OK.getStatusCode())
+                .body(containsString("Saul"))
+                .body(containsString("Berenson"))
+                .body(containsString("call.saul@mail.com"));
+
+        delete("/customers/" + newCustomerId)
+                .then()
+                .statusCode(NO_CONTENT.getStatusCode());
+    }
+
+    @Test
+    void testDeleteThenCustomerIsDisabledWithAdminRole() {
+        var initialActiveCount = get("/customers/active")
+                .then()
+                .statusCode(OK.getStatusCode())
+                .extract()
+                .jsonPath()
+                .getInt("size()");
+
+        var initialInactiveCount = get("/customers/inactive")
+                .then()
+                .statusCode(OK.getStatusCode())
+                .extract().jsonPath()
+                .getInt("size()");
+
+        delete("/customers/1")
+                .then()
+                .statusCode(NO_CONTENT.getStatusCode());
+
+        get("/customers/active")
+                .then()
+                .statusCode(OK.getStatusCode())
+                .body("size()", is(initialActiveCount - 1));
+
+        get("/customers/inactive")
+                .then()
+                .statusCode(OK.getStatusCode())
+                .body("size()", is(initialInactiveCount + 1))
+                .body(containsString("Jason"))
+                .body(containsString("Bourne"));
+    }
 //
 //    @Test
 //    void testAllWithUserRole() {

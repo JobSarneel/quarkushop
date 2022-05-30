@@ -30,7 +30,7 @@ public class ReviewResource {
         return this.reviewService.findById(id);
     }
 
-    @Authenticated
+//    @Authenticated
     @POST
     @Path("/product/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -38,7 +38,7 @@ public class ReviewResource {
         return this.reviewService.create(reviewDto, id);
     }
 
-    @RolesAllowed("admin")
+  //  @RolesAllowed("admin")
     @DELETE
     @Path("/{id}")
     public void delete(@PathParam("id") Long id) {

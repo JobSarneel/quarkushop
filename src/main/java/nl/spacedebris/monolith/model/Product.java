@@ -40,7 +40,7 @@ public class Product extends AbstractEntity {
     private Integer salesCounter;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinTable(name = "product_reviews", joinColumns = @JoinColumn(name = "product_id"),
+    @JoinTable(name = "products_reviews", joinColumns = @JoinColumn(name = "product_id"),
                inverseJoinColumns = @JoinColumn(name = "reviews_id") )
     private Set<Review> reviews = new HashSet<>();
 
