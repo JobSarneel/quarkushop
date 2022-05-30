@@ -118,11 +118,8 @@ alter table "products_reviews"
     add constraint "products_reviews_uk" unique ("reviews_id");
 alter table "orders"
     add constraint "orders_uk" unique ("payment_id");
-
 alter table "products_reviews"
     add constraint "products_reviews_fk1" foreign key ("reviews_id") references "reviews" ("id");
-alter table "products_reviews"
-    add constraint "products_reviews_fk2" foreign key ("product_id") references "products" ("id");
 alter table "carts"
     add constraint "cart_fk" foreign key ("customer_id") references "customers" ("id");
 alter table "order_items"
@@ -135,3 +132,5 @@ alter table "products"
     add constraint "product_fk" foreign key ("category_id") references "categories" ("id");
 alter table "orders"
     add constraint "orders_fk2" foreign key ("cart_id") references "carts" ("id");
+alter table "products_reviews"
+    add constraint "products_reviews_fk2" foreign key ("product_id") references "products" ("id");

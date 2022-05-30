@@ -36,8 +36,8 @@ class CartResourceTest {
     private static final String DELETE_WRONG_CART_IN_DB =
             "delete from carts where id = 9999";
 
-    static String ADMIN_BEARER_TOKEN;
-    static String USER_BEARER_TOKEN;
+//    static String ADMIN_BEARER_TOKEN;
+//    static String USER_BEARER_TOKEN;
 
     @Inject
     DataSource dataSource;

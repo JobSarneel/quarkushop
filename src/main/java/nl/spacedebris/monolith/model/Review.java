@@ -1,8 +1,6 @@
 package nl.spacedebris.monolith.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +8,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-@Getter
+//@Data
 @NoArgsConstructor
+@Getter
+//@AllArgsConstructor
 @ToString(callSuper = true)
 @Entity
 @Table(name = "reviews")
@@ -41,13 +41,7 @@ public class Review extends AbstractEntity {
         if (o == null || getClass() != o.getClass()) return false;
         Review review = (Review) o;
         return Objects.equals(title, review.title)
-            && Objects.equals(description, review.description)
-            && Objects.equals(rating, review.rating);
+                && Objects.equals(description, review.description)
+                && Objects.equals(rating, review.rating);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, description, rating);
-    }
-
 }
