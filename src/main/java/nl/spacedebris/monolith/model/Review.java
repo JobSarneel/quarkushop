@@ -44,4 +44,9 @@ public class Review extends AbstractEntity {
                 && Objects.equals(description, review.description)
                 && Objects.equals(rating, review.rating);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, rating);
+    }
 }
