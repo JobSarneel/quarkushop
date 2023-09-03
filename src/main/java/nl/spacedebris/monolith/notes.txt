@@ -1,4 +1,4 @@
-docker run -d --name demo-postgres -e POSTGRES_USER=test -e POSTGRES_PASSWORD=test -e POSTGRES_DB=demo -p 5432:5432 postgres:13
+docker run -d --name demo -e POSTGRES_USER=demo -e POSTGRES_PASSWORD=demo -e POSTGRES_DB=demo -p 5432:5432 postgres:14
 
 [io.quarkus.deployment.pkg.steps.JarResultBuildStep] Dependencies with duplicate files detected.
 The dependencies
@@ -11,3 +11,19 @@ io.quarkus:quarkus-spring-boot-orm-api::jar:2.1.SP1[paths: C:\Users\jsarn\.m2\re
 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\vsdevcmd\ext\vcvars'
 
 Start-Process -FilePath vcvars.bat
+
+.\mvnw clean package -Pnative
+
+.\mvnw clean
+.\mvnw package -Pnative -Dquarkus.native.container-build=true
+
+docker build -f src/main/docker/Dockerfile.native -t quarkus/code-with-quarkus .
+
+docker run -id --rm --network host --name quarkushop-native -p 8080:8080 quarkus/code-with-quarkus
+
+Invoke-RestMethod -Uri http://localhost:8080/api/carts
+
+
+
+docker run -i --rm -p 8080:8080 quarkus/code-with-quarkus
+
