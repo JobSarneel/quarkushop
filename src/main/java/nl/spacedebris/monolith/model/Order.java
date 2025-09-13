@@ -6,8 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 import nl.spacedebris.monolith.model.enums.OrderStatus;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Objects;

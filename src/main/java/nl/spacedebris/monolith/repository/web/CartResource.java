@@ -5,8 +5,8 @@ import nl.spacedebris.monolith.repository.web.dto.CartDto;
 import nl.spacedebris.monolith.service.CartService;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
-import javax.inject.Inject;
-import javax.ws.rs.*;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
 import java.util.List;
 
 @Authenticated

@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import nl.spacedebris.monolith.model.enums.PaymentStatus;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 

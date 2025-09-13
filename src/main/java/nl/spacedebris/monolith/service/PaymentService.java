@@ -9,9 +9,9 @@ import nl.spacedebris.monolith.repository.OrderRepository;
 import nl.spacedebris.monolith.repository.PaymentRepository;
 import nl.spacedebris.monolith.repository.web.dto.PaymentDto;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;

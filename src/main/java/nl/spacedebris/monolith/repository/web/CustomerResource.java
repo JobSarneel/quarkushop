@@ -5,9 +5,9 @@ import nl.spacedebris.monolith.service.CustomerService;
 import nl.spacedebris.monolith.repository.web.dto.CustomerDto;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/customers")

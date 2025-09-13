@@ -7,9 +7,9 @@ import nl.spacedebris.monolith.repository.CategoryRepository;
 import nl.spacedebris.monolith.repository.ProductRepository;
 import nl.spacedebris.monolith.repository.web.dto.ProductDto;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

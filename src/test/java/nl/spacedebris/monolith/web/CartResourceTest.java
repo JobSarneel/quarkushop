@@ -1,30 +1,30 @@
 package nl.spacedebris.monolith.web;
 
 import io.quarkus.test.common.QuarkusTestResource;
-import io.quarkus.test.junit.DisabledOnNativeImage;
+
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.MediaType;
 import lombok.extern.slf4j.Slf4j;
 import nl.spacedebris.monolith.model.enums.CartStatus;
 import nl.spacedebris.monolith.utils.TestContainerResource;
 import org.junit.jupiter.api.Test;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
-import static javax.ws.rs.core.Response.Status.*;
+import static jakarta.ws.rs.core.Response.Status.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.greaterThan;
 
 
 @Slf4j
-@DisabledOnNativeImage
+
 @QuarkusTest
 @QuarkusTestResource(TestContainerResource.class)
 //@QuarkusTestResource(KeycloakRealmResource.class)
